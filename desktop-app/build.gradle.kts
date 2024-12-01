@@ -24,6 +24,8 @@ dependencies {
     implementation("io.javalin:javalin-bundle:6.3.0")
     implementation("io.nayuki:qrcodegen:1.8.0")
     implementation("com.google.code.gson:gson:2.11.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.23.1")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.23.1")
 
 }
 
@@ -32,8 +34,14 @@ compose.desktop {
         mainClass = "MainKt"
 
         nativeDistributions {
+            windows {
+                shortcut = true
+                menu = true
+                iconFile = file("src/main/resources/icon.ico")
+            }
+
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "desktop-app"
+            packageName = "S Pen PC Remote"
             packageVersion = "1.0.0"
         }
     }

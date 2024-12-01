@@ -1,12 +1,11 @@
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.GraphicsEnvironment
+import java.awt.Rectangle
 import java.awt.Window
-import java.awt.event.ActionEvent
-import java.awt.event.MouseAdapter
-import java.awt.event.MouseEvent
 import javax.swing.JComponent
 import javax.swing.JFrame
-import javax.swing.Timer
+
 
 object LaserPointer {
 
@@ -18,26 +17,49 @@ object LaserPointer {
         laserFrame.opacity = 0.5f
         laserFrame.background = Color(0, 0, 0, 0)
         laserFrame.type = Window.Type.UTILITY
-        laserFrame.setSize(10, 10)
-        laserFrame.setLocationRelativeTo(null)
+        laserFrame.focusableWindowState = false
         laserFrame.isAlwaysOnTop = true
 
+        laserFrame.setSize(20, 20)
         laserFrame.add(object : JComponent() {
             override fun paintComponent(g: Graphics) {
                 super.paintComponent(g)
                 g.color = Color.RED // Laser color
-                g.fillOval(0, 0, 10, 10) // Draw a small circle as laser
+                g.fillOval(0, 0, 20, 20) // Draw a small circle as laser
             }
         })
 
         setVisibility(false)
     }
 
-    fun setVisibility(visible: Boolean) {
-        laserFrame.isVisible = visible
-        if(!visible) {
+    private fun resetPos() {
+        val ge = GraphicsEnvironment.getLocalGraphicsEnvironment()
+        val screens = ge.screenDevices
+
+
+        // Check if a secondary screen is available
+        if (screens.size > 1) {
+            val secondaryScreen = screens[1] // Get the secondary screen
+            val bounds: Rectangle = secondaryScreen.defaultConfiguration.bounds
+
+            // Calculate center position
+            val x: Int = bounds.x + (bounds.width - laserFrame.width) / 2
+            val y: Int = bounds.y + (bounds.height - laserFrame.height) / 2
+
+            // Set location to center on secondary screen
+            laserFrame.setLocation(x, y)
+        } else {
+            // Default to centering on primary screen
             laserFrame.setLocationRelativeTo(null)
         }
+
+    }
+
+    fun setVisibility(visible: Boolean) {
+        if(laserFrame.isVisible != visible) {
+            resetPos()
+        }
+        laserFrame.isVisible = visible
     }
 
     fun move(x: Float, y: Float) {
