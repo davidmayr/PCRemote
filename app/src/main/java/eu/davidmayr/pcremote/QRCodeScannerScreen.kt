@@ -54,7 +54,7 @@ fun QRCodeScannerScreen(navController: NavController, webSocketViewModel: WebSoc
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(),
                 title = {
-                    Text("Scan QR Code")
+                    Text(context.getString(R.string.qr_code_title))
                 },
             )
         },
@@ -67,9 +67,9 @@ fun QRCodeScannerScreen(navController: NavController, webSocketViewModel: WebSoc
 
                 if (!loading) {
                     if (permissionError) {
-                        Text("Could not get camera permission!")
+                        Text(context.getString(R.string.perm_missing))
                     } else {
-                        Text("Scan the QR Code of the PCRemote desktop application and make sure to you are in the same network!")
+                        Text(context.getString(R.string.qr_code_desc))
 
                         AndroidView(
                             factory = { context ->
@@ -115,7 +115,7 @@ fun QRCodeScannerScreen(navController: NavController, webSocketViewModel: WebSoc
                             color = MaterialTheme.colorScheme.secondary,
                             trackColor = MaterialTheme.colorScheme.surfaceVariant,
                         )
-                        Text("Trying to connect...", modifier = Modifier.padding(top = 30.dp))
+                        Text(context.getString(R.string.loading), modifier = Modifier.padding(top = 30.dp))
                     }
 
                 }

@@ -108,7 +108,7 @@ fun PCRemote(
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(),
                 title = {
-                    Text("S Pen PC-Remote")
+                    Text(context.getString(R.string.app_name))
                 },
             )
         },
@@ -130,21 +130,21 @@ fun PCRemote(
                     ) {
                         if (!sPenViewModel.isSpenSupported || sPenViewModel.errorState.isNotEmpty()) {
                             Icon(Icons.Default.Clear, "Failed", modifier = Modifier.padding(end = 10.dp))
-                            Text("Samsung S Pen is not supported on this device or failed.")
+                            Text(context.getString(R.string.spen_unsupported))
                         } else {
                             Icon(Icons.Default.CheckCircle, "Success", modifier = Modifier.padding(end = 10.dp))
-                            Text("Samsung S Pen is supported on this device.")
+                            Text(context.getString(R.string.spen_supported))
                         }
                     }
 
 
 
                     if(!webSocketViewModel.connected) {
-                        Text("Please connect to the same network as the computer and start the paring process.")
+                        Text(context.getString(R.string.same_network))
                         Button(onClick = {
                             navController.navigate("scan")
                         }, modifier = Modifier.padding(top = 10.dp)) {
-                            Text("Scan Device QR Code")
+                            Text(context.getString(R.string.scan_device))
                         }
                     } else {
                         Row(
@@ -152,13 +152,13 @@ fun PCRemote(
                             modifier = Modifier.padding(top = 5.dp, bottom = 20.dp)
                         ) {
                             Icon(Icons.Default.Check, "Connected", modifier = Modifier.padding(end = 10.dp))
-                            Text("You are connected!")
+                            Text(context.getString(R.string.connected))
                         }
 
                         Button(onClick = {
                             webSocketViewModel.closeConnection()
                         }) {
-                            Text("Disconnect")
+                            Text(context.getString(R.string.disconnect))
                         }
                     }
                 }

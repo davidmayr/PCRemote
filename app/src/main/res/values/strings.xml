@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">S Pen PCRemote</string>
+    <string name="spen_supported">Samsung S Pen is supported on this device.</string>
+    <string name="spen_unsupported">Samsung S Pen is not supported on this device or failed.</string>
+    <string name="scan_device">Scan Device QR Code</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connected">You are connected!</string>
+
+    <string name="same_network">Please connect to the same network as the computer and start the paring process.</string>
+    <string name="qr_code_title">Scan QR Code</string>
+    <string name="qr_code_desc">Scan the QR Code of the PCRemote desktop application and make sure to you are in the same network!</string>
+    <string name="loading">Trying to connect…</string>
+    <string name="perm_missing">Could not get camera permission!</string>
+
 </resources>
