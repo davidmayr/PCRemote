@@ -1,3 +1,5 @@
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import io.javalin.Javalin
@@ -30,10 +32,6 @@ object WebServer {
 
     val webServer = Javalin.create { config ->
         config.router.mount { router ->
-            router.get("/") {
-                println("Hi")
-                it.result("Hello World")
-            }
             router.ws("/") { ws ->
                 ws.onError {
                     println("Err")
@@ -71,16 +69,13 @@ object WebServer {
                             val doubleClick = jsonObject.get("d").asBoolean
                             if(doubleClick) {
 
-                                // Simulate pressing the "A" key
-                                robot.keyPress(KeyEvent.VK_LEFT) // Press "A"
-                                robot.keyRelease(KeyEvent.VK_LEFT) // Release "A"
+                                robot.keyPress(KeyEvent.VK_LEFT)
+                                robot.keyRelease(KeyEvent.VK_LEFT)
                             } else {
-                                robot.keyPress(KeyEvent.VK_RIGHT) // Press "A"
-                                robot.keyRelease(KeyEvent.VK_RIGHT) // Release "A"
+                                robot.keyPress(KeyEvent.VK_RIGHT)
+                                robot.keyRelease(KeyEvent.VK_RIGHT)
                             }
                         }
-
-                        println("Message" + ctx.message())
                     }
                 }
             }

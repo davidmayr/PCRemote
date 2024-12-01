@@ -11,7 +11,6 @@ import javax.swing.Timer
 object LaserPointer {
 
     val laserFrame = JFrame()
-    var lastMoved = System.currentTimeMillis()
 
     init {
 
@@ -20,7 +19,7 @@ object LaserPointer {
         laserFrame.background = Color(0, 0, 0, 0)
         laserFrame.type = Window.Type.UTILITY
         laserFrame.setSize(10, 10)
-        laserFrame.setLocation(500, 500)
+        laserFrame.setLocationRelativeTo(null)
         laserFrame.isAlwaysOnTop = true
 
         laserFrame.add(object : JComponent() {
@@ -37,7 +36,7 @@ object LaserPointer {
     fun setVisibility(visible: Boolean) {
         laserFrame.isVisible = visible
         if(!visible) {
-            laserFrame.setLocation(500, 500)
+            laserFrame.setLocationRelativeTo(null)
         }
     }
 

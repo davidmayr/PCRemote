@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -68,10 +67,6 @@ dependencies {
 // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt(libs.hilt.android.compiler)
-
 
     implementation(libs.androidx.navigation.compose)
 

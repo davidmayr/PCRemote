@@ -39,16 +39,9 @@ class SPenViewModel(
             return buttonPressed && System.currentTimeMillis() - buttonPressedSince > doubleClickTime*2
         }
 
-    fun toggleConnected(context: Context) {
-        if(SpenRemote.getInstance().isConnected) {
-            disconnect(context)
-        } else {
-            connect(context)
-        }
-    }
 
 
-    private fun connect(context: Context) {
+    fun connect(context: Context) {
         isConnecting = true
         try {
 
@@ -112,7 +105,6 @@ class SPenViewModel(
                         val time = System.currentTimeMillis()
 
                         if(!isLaserPointerActive) {
-                            println(buttonUpLastTime - System.currentTimeMillis())
                             if(System.currentTimeMillis()-buttonUpLastTime > doubleClickTime) {
 
                                 viewModelScope.launch {

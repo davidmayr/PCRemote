@@ -32,6 +32,11 @@ class WebSocketViewModel : ViewModel() {
         override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
             super.onFailure(webSocket, t, response)
             println("Error: ${t.message}")
+
+            if(webSocket == this@WebSocketViewModel.webSocket) {
+                this@WebSocketViewModel.webSocket = null
+                connected = false
+            }
         }
 
         override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
@@ -56,7 +61,7 @@ class WebSocketViewModel : ViewModel() {
         val request = Request.Builder().url("ws://$ip:$port").build()
         webSocket = client.newWebSocket(request, listener)
         webSocket?.send(pw)
-        println("connected to " + "ws://$ip:$port")
+        println("connected to ws://$ip:$port")
     }
 
     fun sendButtonClick(double: Boolean) {
@@ -76,6 +81,7 @@ class WebSocketViewModel : ViewModel() {
 
     fun closeConnection() {
         webSocket?.close(1000, "Closing connection")
+        connected = false
     }
 
     override fun onCleared() {
