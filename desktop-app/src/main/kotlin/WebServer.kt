@@ -10,17 +10,21 @@ import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 import java.net.InetAddress
 import java.net.UnknownHostException
+import java.security.SecureRandom
 import java.util.*
 
+val random = SecureRandom()
 
 fun generateAuthToken(length: Int = 16): String {
     val charPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     return (1..length)
-        .map { charPool.random() }
+        .map { charPool[random.nextInt(charPool.length)] }
         .joinToString("")
 }
 
 object WebServer {
+
+    //TODO: Some sort of encryption maybe?
 
     val robot = Robot()
 
